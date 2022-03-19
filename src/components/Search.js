@@ -24,7 +24,7 @@ const Search = (props) => {
   const onTrigger = (event) => {
     props.searchCall(event);
     setFilterValue([]);
-    event.preventDefault();
+    // event.preventDefault();
   };
 
   const handleSearch = (event) => {
@@ -54,6 +54,7 @@ const Search = (props) => {
               <p
                 style={{ cursor: "pointer" }}
                 onClick={() => onTrigger(e.original_title)}
+                key={e.id}
               >
                 {e.original_title}
               </p>

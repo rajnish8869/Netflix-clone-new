@@ -9,7 +9,7 @@ export const TitleList = (props) => {
   useEffect(() => {
     var requestUrl =
       "https://api.themoviedb.org/3/" + props.url + "&api_key=" + apiKey;
-    console.log("requestUrl", requestUrl);
+    // console.log("requestUrl", requestUrl);
 
     fetch(requestUrl)
       .then((response) => {
@@ -23,7 +23,7 @@ export const TitleList = (props) => {
       });
   }, [props.url]);
 
-  // console.log("data.results", data.results);
+  // console.log("requestUrl", requestUrl);
 
   return (
     <div className="TitleList">
