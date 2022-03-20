@@ -27,6 +27,12 @@ const Search = (props) => {
     // event.preventDefault();
   };
 
+  const onSubmit = (event) => {
+    props.searchCall(event.target.search.value);
+    setFilterValue([]);
+    event.preventDefault();
+  };
+
   const handleSearch = (event) => {
     setSearchValue(event.target.value);
     const filterArray = data.results.filter((e) => {
@@ -41,11 +47,15 @@ const Search = (props) => {
 
   return (
     <div id="search" className="Search movieList">
-      <input
-        type="search"
-        placeholder="Search for a title..."
-        onChange={handleSearch}
-      />
+      <form onSubmit={onSubmit} className="form-data">
+        <input
+          type="search"
+          placeholder="Search for a title..."
+          name="search"
+          onChange={handleSearch}
+        />
+        <input type="submit" className="submit" value="Submit" />
+      </form>
       <div className="movieList movieShow">
         {filterValue.length != 0 &&
           searchValue !== "" &&

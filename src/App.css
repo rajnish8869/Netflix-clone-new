@@ -221,7 +221,7 @@ p {
   border-radius: 16px;
 }
 
-.Search input {
+.Search input[type="search"] {
   font-family: "Lato", sans-serif;
   font-weight: 300;
   font-size: 14px;
@@ -240,9 +240,29 @@ p {
   visibility: visible;
 }
 
-.Search input:focus {
+.Search input[type="search"]:focus {
   border: 2px solid #e50914;
   width: 100%;
+}
+.Search input[type="submit"] {
+  visibility: visible;
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  border: 2px solid rgba(245, 245, 241, 0.1);
+  border-radius: 0px 37px 37px 0px;
+  padding: 0px 25px;
+}
+
+.Search input[type="submit"]:focus {
+  border: 2px solid #ffffff;
+}
+
+.form-data {
+  display: flex;
+  position: relative;
 }
 
 .UserProfile .User {
