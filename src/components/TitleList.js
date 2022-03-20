@@ -26,7 +26,7 @@ export const TitleList = (props) => {
   // console.log("requestUrl", requestUrl);
 
   return (
-    <div className="TitleList">
+    <div className="TitleList" ref={props.scrollRef}>
       {data.results && (
         <div className="Title">
           <h1>{props.title}</h1>

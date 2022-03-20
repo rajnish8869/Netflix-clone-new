@@ -238,6 +238,7 @@ p {
   pointer-events: all;
   transition: border 0.25s ease, width 0.125s ease 0.125s;
   visibility: visible;
+  padding-left: 20px;
 }
 
 .Search input[type="search"]:focus {
@@ -415,9 +416,9 @@ p {
   margin-right: 10px;
   transition: background 1s ease;
 }
-.Item:nth-child(n + 6) {
+/* .Item:nth-child(n + 6) {
   margin-top: 20px;
-}
+} */
 .Item:last-child {
   margin-right: 0;
 }
@@ -531,7 +532,7 @@ p {
   height: 200px;
   overflow: hidden;
   overflow-y: scroll;
-  /* margin: 10px; */
+  margin: 20px;
   margin-top: 0px;
 }
 /* .movieList:focus-within {

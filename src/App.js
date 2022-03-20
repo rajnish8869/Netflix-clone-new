@@ -24,17 +24,23 @@ const App = () => {
     // console.log("searchValueNew", searchValue);
   };
 
+  const scrollRef = React.useRef(null);
+
   console.log("randomNumber", randomNumbers);
   return (
     <div>
       <header className="Header">
         <Logo />
         <Navigation />
-        <Search searchCall={handleCall} />
+        <Search searchCall={handleCall} scrollRef={scrollRef} />
         <UserProfile />
       </header>
       <Hero />
-      <TitleList title="Search Results" url={searchTerm} />
+      <TitleList
+        title="Search Results"
+        url={searchTerm}
+        scrollRef={scrollRef}
+      />
       <TitleList
         title="Top TV picks for Rajnish"
         url={`discover/tv?sort_by=popularity.desc&page=${randomNumbers}`}

@@ -24,12 +24,18 @@ const Search = (props) => {
   const onTrigger = (event) => {
     props.searchCall(event);
     setFilterValue([]);
+    props.scrollRef.current.scrollIntoView({ behavior: "smooth" });
+
     // event.preventDefault();
   };
 
   const onSubmit = (event) => {
     props.searchCall(event.target.search.value);
     setFilterValue([]);
+    if (event.target.search.value != "") {
+      props.scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+
     event.preventDefault();
   };
 
