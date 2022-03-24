@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import TitleList from "./components/TitleList";
-import Logo from "./components/Logo";
-import Navigation from "./components/Navigation";
-import UserProfile from "./components/UserProfile";
-import Hero from "./components/Hero";
-import Search from "./components/Search";
+import Logo from "./components/navbar/Logo";
+import Navigation from "./components/navbar/Navigation";
+import UserProfile from "./components/navbar/UserProfile";
+import Search from "./components/navbar/Search";
+import Home from "./components/home/home";
+import Mylist from "./components/mylist/Mylist";
+import Toppick from "./components/toppick/Toppick";
+import Recent from "./components/recent/Recent";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [randomNumbers, setrandomNumbers] = useState(10);
+  const [myList, setMyList] = useState(null);
 
   var randomNumber = () => {
     setrandomNumbers(Math.floor(Math.random() * 10 + 1));
@@ -17,16 +21,22 @@ const App = () => {
 
   useEffect(() => {
     randomNumber();
-  }, []);
+  }, [randomNumbers]);
 
   const handleCall = (searchValue) => {
     setSearchTerm(`search/multi?query=${searchValue}`);
     // console.log("searchValueNew", searchValue);
   };
 
+  const handleHome = (array) => {
+    // console.log("appArray", array);
+    setMyList(array);
+  };
+
+  localStorage.setItem("myList", JSON.stringify(myList));
+
   const scrollRef = React.useRef(null);
 
-  console.log("randomNumber", randomNumbers);
   return (
     <div>
       <header className="Header">
@@ -35,32 +45,28 @@ const App = () => {
         <Search searchCall={handleCall} scrollRef={scrollRef} />
         <UserProfile />
       </header>
-      <Hero />
-      <TitleList
-        title="Search Results"
-        url={searchTerm}
-        scrollRef={scrollRef}
-      />
-      <TitleList
-        title="Top TV picks for Rajnish"
-        url={`discover/tv?sort_by=popularity.desc&page=${randomNumbers}`}
-      />
-      <TitleList
-        title="Trending now"
-        url={`discover/movie?sort_by=popularity.desc&page=${randomNumbers}`}
-      />
-      <TitleList
-        title="Comedy magic"
-        url={`genre/35/movies?sort_by=popularity.desc&page=${randomNumbers}`}
-      />
-      <TitleList
-        title="Sci-Fi greats"
-        url={`genre/878/movies?sort_by=popularity.desc&page=${randomNumbers}`}
-      />
-      <TitleList
-        title="Most watched in Horror"
-        url={`genre/27/movies?sort_by=popularity.desc&page=${randomNumbers}`}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              searchTerm={searchTerm}
+              scrollRef={scrollRef}
+              randomNumbers={randomNumbers}
+              appCall={handleHome}
+            />
+          }
+        ></Route>
+        <Route path="/mylist" element={<Mylist myList={myList} />}></Route>
+        <Route
+          path="/toppick"
+          element={<Toppick randomNumbers={randomNumbers} />}
+        ></Route>
+        <Route
+          path="/recent"
+          element={<Recent searchTerm={searchTerm} />}
+        ></Route>
+      </Routes>
     </div>
   );
 };

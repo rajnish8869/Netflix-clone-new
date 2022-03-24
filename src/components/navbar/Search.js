@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 const Search = (props) => {
   const [filterValue, setFilterValue] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const [data, setData] = useState([]);
   const apiKey = "a4e58d56fe8690c89ebed28c6816ff3f";
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     var requestUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchValue}`;
@@ -24,6 +27,7 @@ const Search = (props) => {
   const onTrigger = (event) => {
     props.searchCall(event);
     setFilterValue([]);
+    navigate("/");
     props.scrollRef.current.scrollIntoView({ behavior: "smooth" });
 
     // event.preventDefault();
@@ -32,10 +36,10 @@ const Search = (props) => {
   const onSubmit = (event) => {
     props.searchCall(event.target.search.value);
     setFilterValue([]);
+    navigate("/");
     if (event.target.search.value != "") {
       props.scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
-
     event.preventDefault();
   };
 
@@ -52,7 +56,7 @@ const Search = (props) => {
   };
 
   return (
-    <div id="search" className="Search movieList">
+    <div id="search" className="Search">
       <form onSubmit={onSubmit} className="form-data">
         <input
           type="search"
@@ -60,12 +64,16 @@ const Search = (props) => {
           name="search"
           onChange={handleSearch}
         />
-        <input type="submit" className="submit" value="Submit" />
+        <input type="submit" className="submit" value="Search" />
       </form>
-      <div className="movieList movieShow">
-        {filterValue.length != 0 &&
-          searchValue !== "" &&
-          filterValue.map((e) => {
+      {filterValue.length != 0 && searchValue !== "" && (
+        <div
+          className=" movieShow"
+          style={{
+            display: searchValue == "" ? "none" : "block",
+          }}
+        >
+          {filterValue.map((e) => {
             return (
               <p
                 style={{ cursor: "pointer" }}
@@ -76,7 +84,8 @@ const Search = (props) => {
               </p>
             );
           })}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 
-const ListToggle = () => {
+const ListToggle = (props) => {
   let [toggled, setToggled] = useState(false);
 
   const handleClick = () => {
     if (toggled === true) {
       setToggled(false);
+      props.itemsCall(false);
     } else {
       setToggled(true);
+      props.itemsCall(true);
     }
   };
+
+  // console.log("listToggle");
 
   return (
     <div onClick={handleClick} data-toggled={toggled} className="ListToggle">

@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "../favicon.ico";
+import Image from "./author-image.jpg";
 
 const UserProfile = () => {
   return (
