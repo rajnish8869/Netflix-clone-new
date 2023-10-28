@@ -25,11 +25,9 @@ const App = () => {
 
   const handleCall = (searchValue) => {
     setSearchTerm(`search/multi?query=${searchValue}`);
-    // console.log("searchValueNew", searchValue);
   };
 
   const handleHome = (array) => {
-    // console.log("appArray", array);
     setMyList(array);
   };
 

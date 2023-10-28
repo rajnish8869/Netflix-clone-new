@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import Item from "./Item";
 
 export const MyTitleList = (props) => {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   props.myListData;
-  // }, [props.myListData]);
-
   return (
     <div className="TitleList">
       {props.myListData && (

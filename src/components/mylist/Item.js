@@ -12,7 +12,6 @@ const Item = (props) => {
         <div className="title">{props.title}</div>
         <div className="rating">{props.score} / 10</div>
         <div className="plot">{props.overview}</div>
-        {/* <ListToggle itemsCall={handleListToggle} id={props.id} /> */}
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ export const TitleList = (props) => {
   useEffect(() => {
     var requestUrl =
       "https://api.themoviedb.org/3/" + props.url + "&api_key=" + apiKey;
-    // console.log("requestUrl", requestUrl);
 
     fetch(requestUrl)
       .then((response) => {
@@ -22,8 +21,6 @@ export const TitleList = (props) => {
         console.log("There has been an error");
       });
   }, [props.url]);
-
-  // console.log("requestUrl", requestUrl);
 
   let handleItems = (boolean, id, title, score, overview, backdrop) => {
     props.homeCall(boolean, id, title, score, overview, backdrop);

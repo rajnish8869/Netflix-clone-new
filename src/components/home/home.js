@@ -43,9 +43,6 @@ const home = (props) => {
     props.appCall(array);
   }, [array]);
 
-  // console.log("array", array);
-  // localStorage.setItem("array", JSON.stringify(array));
-
   return (
     <div>
       <Hero />

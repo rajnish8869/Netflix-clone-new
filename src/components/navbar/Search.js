@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 const Search = (props) => {
-  const [filterValue, setFilterValue] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
   const [data, setData] = useState([]);
+  const [searchFocus, setSearchFocus] = useState(false);
   const apiKey = "a4e58d56fe8690c89ebed28c6816ff3f";
 
   let navigate = useNavigate();
@@ -17,75 +16,78 @@ const Search = (props) => {
         return response.json();
       })
       .then((datas) => {
-        setData(datas);
+        setData(
+          datas?.results.filter((e) => {
+            return e.original_title
+              .toLowerCase()
+              .includes(searchValue.toLowerCase());
+          })
+        );
       })
       .catch((err) => {
-        console.log("There has been an error");
+        console.log("There has been an error", err);
       });
   }, [searchValue]);
 
   const onTrigger = (event) => {
+    // setSearchValue("");
+    setSearchFocus(false);
     props.searchCall(event);
-    setFilterValue([]);
     navigate("/");
-    props.scrollRef.current.scrollIntoView({ behavior: "smooth" });
-
-    // event.preventDefault();
+    props.scrollRef.current.scrollIntoView({
+      block: "end",
+      behavior: "smooth",
+    });
   };
 
   const onSubmit = (event) => {
     props.searchCall(event.target.search.value);
-    setFilterValue([]);
     navigate("/");
     if (event.target.search.value != "") {
-      props.scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      props.scrollRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     }
+    setSearchFocus(false);
     event.preventDefault();
   };
 
   const handleSearch = (event) => {
     setSearchValue(event.target.value);
-    const filterArray = data.results.filter((e) => {
-      return e.original_title.toLowerCase().includes(searchValue.toLowerCase());
-    });
-    if (searchValue === "") {
-      setFilterValue([]);
-    } else {
-      setFilterValue(filterArray);
-    }
   };
 
   return (
     <div id="search" className="Search">
       <form onSubmit={onSubmit} className="form-data">
         <input
-          type="search"
+          type="text"
           placeholder="Search for a title..."
           name="search"
           onChange={handleSearch}
+          onFocus={() => setSearchFocus(true)}
+          className="inputSearch"
         />
         <input type="submit" className="submit" value="Search" />
       </form>
-      {filterValue.length != 0 && searchValue !== "" && (
-        <div
-          className=" movieShow"
-          style={{
-            display: searchValue == "" ? "none" : "block",
-          }}
-        >
-          {filterValue.map((e) => {
-            return (
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={() => onTrigger(e.original_title)}
-                key={e.id}
-              >
-                {e.original_title}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <div
+        className="movieShow"
+        style={{
+          display: searchFocus == false ? "none" : "block",
+        }}
+      >
+        {data?.map((e) => {
+          return (
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => onTrigger(e.original_title)}
+              key={e.id}
+            >
+              {e.original_title}
+            </p>
+          );
+        })}
+      </div>
     </div>
   );
 };

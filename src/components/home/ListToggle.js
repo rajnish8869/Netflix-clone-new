@@ -13,8 +13,6 @@ const ListToggle = (props) => {
     }
   };
 
-  // console.log("listToggle");
-
   return (
     <div onClick={handleClick} data-toggled={toggled} className="ListToggle">
       <div>

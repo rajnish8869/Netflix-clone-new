@@ -394,7 +394,7 @@ p {
   z-index: 4;
 }
 .TitleList .titles-wrapper {
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   display: flex;
   /* flex-wrap: wrap; */
@@ -602,4 +602,24 @@ p {
 .Navigation a {
   color: white !important;
   text-decoration: none !important;
+}
+
+.inputSearch {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  height: 37px;
+  width: 100%;
+  background: black;
+  color: #ffffff;
+  appearance: none;
+  border: 0;
+  border: 2px solid rgba(245, 245, 241, 0.1);
+  outline: none;
+  border-radius: 25px;
+  padding: 0 10px;
+  pointer-events: all;
+  transition: border 0.25s ease, width 0.125s ease 0.125s;
+  visibility: visible;
+  padding-left: 20px;
 }
